@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
 import { useUploadThing } from "@/lib/upload-thing";
-import { CloudUpload, FileIcon } from "lucide-react";
+import { CloudUpload, FileIcon, Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
@@ -114,9 +114,18 @@ const UploadDropzone = () => {
                 {isUploading ? (
                   <div className="w-full mt-4 max-w-xs mx-auto">
                     <Progress
+                      indicatorColor={
+                        uploadProgress === 100 ? "bg-green-500" : ""
+                      }
                       className="h-1 w-full bg-muted-foreground/50"
                       value={uploadProgress}
                     />
+                    {uploadProgress === 100 ? (
+                      <div className="flex gap-1 items-center justify-center text-sm text-muted-foreground/50 text-center pt-2">
+                        <Loader2Icon className="h-4 2-4 animate-spin" />
+                        Redirecting...
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
                 <input

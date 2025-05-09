@@ -6,7 +6,7 @@ import Navbar from "./components/global/navbar";
 import { ThemeProvider } from "next-themes";
 import TRPCProvider from "@/providers/tRPC";
 import { Toaster } from "sonner";
-
+import "simplebar-react/dist/simplebar.min.css";
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",

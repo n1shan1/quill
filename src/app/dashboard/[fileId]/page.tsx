@@ -3,7 +3,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 import PdfRenderer from "../_components/pdf-renderer";
-import ChatWrapper from "../_components/chat-wrapper";
+import ChatWrapper from "../_components/chat/chat-wrapper";
 
 interface PageProps {
   params: {
@@ -31,7 +31,7 @@ async function FilePage({ params }: PageProps) {
         {/* PDF viewer section - full width on mobile, flex-1 on larger screens */}
         <div className="flex-1">
           <div className="px-4 py-6 sm:px-6 lg:pl-8 xl:pl-6">
-            <PdfRenderer />
+            <PdfRenderer fileUrl={file.url ?? ""} />
           </div>
         </div>
 
