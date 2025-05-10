@@ -15,11 +15,9 @@ const authProcedure = t.middleware(async (opts) => {
   }
   return opts.next({
     ctx: {
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.given_name,
-      },
+      id: user.id,
+      email: user.email,
+      name: user.given_name,
     },
   });
 });

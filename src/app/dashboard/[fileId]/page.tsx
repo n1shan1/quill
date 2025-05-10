@@ -34,10 +34,9 @@ async function FilePage({ params }: PageProps) {
             <PdfRenderer fileUrl={file.url ?? ""} />
           </div>
         </div>
-
         {/* Chat section - full width on mobile, placed below PDF */}
         <div className="border-t border-foreground/40 md:shrink-0 md:flex-[0.75] md:border-l md:border-t-0 lg:w-96">
-          <ChatWrapper />
+          <ChatWrapper fileId={file.id} />
         </div>
       </div>
     </div>
