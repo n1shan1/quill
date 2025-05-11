@@ -8,6 +8,8 @@ import { Document } from "@langchain/core/documents";
 import { PineconeStore } from "@langchain/pinecone";
 import { NextRequest } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
