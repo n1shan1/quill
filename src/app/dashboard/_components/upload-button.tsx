@@ -16,13 +16,15 @@ import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { toast } from "sonner";
 
-const UploadDropzone = () => {
+const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter();
   const [isUploading, setIsUploading] = useState<boolean | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
 
-  const { startUpload } = useUploadThing("pdfUploader");
+  const { startUpload } = useUploadThing(
+    isSubscribed ? "proPlanUploader" : "freePlanUploader"
+  );
 
   const { mutate: startPolling } = trpc.getFile.useMutation({
     onSuccess: (file) => {
@@ -107,8 +109,9 @@ const UploadDropzone = () => {
       {({ getRootProps, getInputProps, acceptedFiles, isDragActive }) => (
         <div
           {...getRootProps()}
-          className={`border h-64 m-4 border-dashed border-foreground/30 rounded-lg transition-colors ${isDragActive ? "bg-foreground/20" : "bg-foreground/10"
-            }`}
+          className={`border h-64 m-4 border-dashed border-foreground/30 rounded-lg transition-colors ${
+            isDragActive ? "bg-foreground/20" : "bg-foreground/10"
+          }`}
         >
           <div className="flex items-center justify-center h-full w-full">
             <div className="flex flex-col items-center justify-center w-full h-full rounded-lg cursor-pointer">
@@ -120,7 +123,7 @@ const UploadDropzone = () => {
                   or drag and drop the file.
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Allowed PDF&apos;s upto {"4MB"} only.
+                  Allowed PDF&apos;s upto {isSubscribed ? "16MB" : "4MB"} only.
                 </p>
                 {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
               </div>
@@ -167,7 +170,7 @@ const UploadDropzone = () => {
   );
 };
 
-function UploadButton() {
+function UploadButton({ isSubscribed }: { isSubscribed: boolean }) {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -186,7 +189,7 @@ function UploadButton() {
         <DialogHeader>
           <DialogTitle>Upload the PDF to chat with!</DialogTitle>{" "}
         </DialogHeader>
-        <UploadDropzone />
+        <UploadDropzone isSubscribed={isSubscribed} />
       </DialogContent>
     </Dialog>
   );

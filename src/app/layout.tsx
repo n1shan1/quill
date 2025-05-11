@@ -1,21 +1,17 @@
-import type { Metadata } from "next";
-import { Outfit } from "@next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import Navbar from "./components/global/navbar";
-import { ThemeProvider } from "next-themes";
+import { cn, ConstructMetadata } from "@/lib/utils";
 import TRPCProvider from "@/providers/tRPC";
-import { Toaster } from "sonner";
+import { Outfit } from "@next/font/google";
+import { ThemeProvider } from "next-themes";
 import "simplebar-react/dist/simplebar.min.css";
+import { Toaster } from "sonner";
+import Navbar from "./components/global/navbar";
+import "./globals.css";
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
 });
 
-export const metadata: Metadata = {
-  title: "Quill - Chat with your documents",
-  description: "Upload and chat with your PDF documents",
-};
+export const metadata = ConstructMetadata();
 
 export default function RootLayout({
   children,

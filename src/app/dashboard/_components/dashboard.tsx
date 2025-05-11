@@ -9,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Ghost, Loader2Icon, MessageSquare, Trash2Icon } from "lucide-react";
@@ -16,8 +17,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import UploadButton from "./upload-button";
-
-function Dashboard() {
+interface Props {
+  subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>;
+}
+function Dashboard({ subscriptionPlan }: Props) {
   const [deletingFileId, setDeletingFileId] = useState<string | null>(null);
   const { data: files, isLoading, refetch } = trpc.getUserFiles.useQuery();
 
@@ -46,7 +49,7 @@ function Dashboard() {
         <h1 className="mb-3 font-bold text-5xl text-muted-foreground">
           My Files
         </h1>
-        <UploadButton />
+        <UploadButton isSubscribed={subscriptionPlan.isSubscribed} />
       </div>
 
       {files && files?.length !== 0 ? (
