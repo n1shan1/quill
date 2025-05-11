@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Expand, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Document, Page } from "react-pdf";
