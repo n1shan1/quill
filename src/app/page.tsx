@@ -1,13 +1,10 @@
-import React from "react";
-import MaxWidthWrapper from "./components/global/max-width-wrapper";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import MaxWidthWrapper from "./components/global/max-width-wrapper";
 
-type Props = {};
-
-function page({}: Props) {
+function page() {
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center">

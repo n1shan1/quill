@@ -2,11 +2,11 @@ import { db } from "@/app/db";
 import { createGeminiEmbeddings } from "@/lib/gemini-embeddings";
 import { pinecone } from "@/lib/pinecone";
 import { sendMessageValidator } from "@/lib/validators/send-message-validator";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Document } from "@langchain/core/documents";
 import { PineconeStore } from "@langchain/pinecone";
 import { NextRequest } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Document } from "@langchain/core/documents";
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -92,10 +92,10 @@ export const POST = async (req: NextRequest) => {
     const result = await model.generateContentStream(prompt);
 
     const encoder = new TextEncoder();
-    const decoder = new TextDecoder();
+    // const decoder = new TextDecoder();
 
     let fullText = "";
-    let hasError = false;
+    // let hasError = false;
 
     const stream = new ReadableStream({
       async start(controller) {
@@ -125,7 +125,7 @@ export const POST = async (req: NextRequest) => {
           );
           controller.close();
         } catch (error) {
-          hasError = true;
+          // hasError = true;
           console.error("Streaming error:", error);
           controller.enqueue(
             encoder.encode(

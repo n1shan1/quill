@@ -17,9 +17,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import UploadButton from "./upload-button";
 
-type Props = {};
-
-function Dashboard({}: Props) {
+function Dashboard() {
   const [deletingFileId, setDeletingFileId] = useState<string | null>(null);
   const { data: files, isLoading, refetch } = trpc.getUserFiles.useQuery();
 

@@ -7,11 +7,10 @@ import { useContext, useRef } from "react";
 import { ChatContext } from "./chat-context";
 
 type Props = {
-  fileId: string;
   isDisabled?: boolean;
 };
 
-function ChatInput({ fileId, isDisabled }: Props) {
+function ChatInput({ isDisabled }: Props) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const { addMessage, message, handleInputChange, isLoading } =
     useContext(ChatContext);

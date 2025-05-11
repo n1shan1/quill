@@ -19,11 +19,8 @@ type Props = {
 
 function PdfFullScreen({ fileUrl }: Props) {
   const [open, setOpen] = useState(false);
-  const { ref, width, height } = useResizeDetector();
+  const { ref, width } = useResizeDetector();
   const [numPages, setNumPages] = useState<number>();
-  const [currPage, setCurrPage] = useState<number>(1);
-  const [scale, setScale] = useState<number>(1);
-  const [rotation, setRotation] = useState<number>(0);
   return (
     <Dialog
       open={open}

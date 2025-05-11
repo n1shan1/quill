@@ -43,7 +43,7 @@ type Props = {
   fileUrl: string;
 };
 function PdfRenderer({ fileUrl }: Props) {
-  const { ref, width, height } = useResizeDetector();
+  const { ref, width } = useResizeDetector();
   const [numPages, setNumPages] = useState<number>();
   const [currPage, setCurrPage] = useState<number>(1);
   const [scale, setScale] = useState<number>(1);

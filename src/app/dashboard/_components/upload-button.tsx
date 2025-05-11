@@ -63,7 +63,8 @@ const UploadDropzone = () => {
       }
 
       const file = acceptedFiles[0];
-      if (file.size > 4 * 1024 * 1024) { // 4MB limit
+      if (file.size > 4 * 1024 * 1024) {
+        // 4MB limit
         throw new Error("File size exceeds 4MB limit");
       }
 
@@ -99,7 +100,7 @@ const UploadDropzone = () => {
     <Dropzone
       multiple={false}
       accept={{
-        'application/pdf': ['.pdf']
+        "application/pdf": [".pdf"],
       }}
       onDrop={handleFileUpload}
     >
@@ -107,7 +108,7 @@ const UploadDropzone = () => {
         <div
           {...getRootProps()}
           className={`border h-64 m-4 border-dashed border-foreground/30 rounded-lg transition-colors ${
-            isDragActive ? 'bg-foreground/20' : 'bg-foreground/10'
+            isDragActive ? "bg-foreground/20" : "bg-foreground/10"
           }`}
         >
           <div className="flex items-center justify-center h-full w-full">
@@ -122,12 +123,10 @@ const UploadDropzone = () => {
                 <p className="text-xs text-muted-foreground">
                   Allowed PDF&apos;s upto {"4MB"} only.
                 </p>
-                {error && (
-                  <p className="text-xs text-red-500 mt-2">{error}</p>
-                )}
+                {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
               </div>
 
-              {acceptedFiles && acceptedFiles[0]? (
+              {acceptedFiles && acceptedFiles[0] ? (
                 <div className="max-w-xs bg-background flex items-center rounded-md overflow-hidden outline outline-[1px] outline-foreground/20 divide-x divide-muted-foreground/40">
                   <div className="px-3 py-2 h-full grid place-items-center">
                     <FileIcon className="h-4 w-4" />
@@ -141,7 +140,9 @@ const UploadDropzone = () => {
               {isUploading ? (
                 <div className="w-full mt-4 max-w-xs mx-auto">
                   <Progress
-                    indicatorColor={uploadProgress === 100 ? "bg-green-500" : ""}
+                    indicatorColor={
+                      uploadProgress === 100 ? "bg-green-500" : ""
+                    }
                     className="h-1 w-full bg-muted-foreground/50"
                     value={uploadProgress}
                   />
@@ -167,9 +168,7 @@ const UploadDropzone = () => {
   );
 };
 
-type Props = {};
-
-function UploadButton({}: Props) {
+function UploadButton() {
   const [open, setOpen] = useState<boolean>(false);
 
   return (

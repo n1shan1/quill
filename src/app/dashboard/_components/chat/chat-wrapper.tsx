@@ -19,7 +19,7 @@ function ChatWrapper({ fileId }: Props) {
     {
       refetchInterval: (data) =>
         data.state.data?.fileStatus === "SUCCESS" ||
-          data.state.data?.fileStatus === "FAILED"
+        data.state.data?.fileStatus === "FAILED"
           ? false
           : 500,
     }
@@ -81,7 +81,7 @@ function ChatWrapper({ fileId }: Props) {
         <div className="flex-1 justify-between flex flex-col mb-28">
           <Messages fileId={fileId} />
         </div>
-        <ChatInput fileId={fileId} />
+        <ChatInput />
       </div>
     </ChatContextProvider>
   );

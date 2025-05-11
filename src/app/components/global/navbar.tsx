@@ -5,9 +5,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
-type Props = {};
 
-function Navbar({}: Props) {
+function Navbar() {
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-foreground/60 bg-background/75 backdrop-blur-lg transition-all ">
       <MaxWidthWrapper>

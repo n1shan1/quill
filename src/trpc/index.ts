@@ -4,6 +4,9 @@ import { TRPCError } from "@trpc/server";
 import { db } from "@/app/db";
 import { z } from "zod";
 import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
+import { absoluteURL } from "@/lib/utils";
+import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
+import { PLANS } from "@/config/stripe";
 export const appRouter = router({
   authCallback: publicProcedure.query(async () => {
     const { getUser } = getKindeServerSession();
@@ -157,6 +160,59 @@ export const appRouter = router({
         nextCursor,
       };
     }),
+
+  createStripeSession: protectedProcedure.mutation(async ({ ctx }) => {
+    const user = ctx;
+
+    const billingUrl = absoluteURL("/dashboard/billing");
+    if (!user.id) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    const dbUser = await db.user.findFirst({
+      where: {
+        id: user.id,
+      },
+    });
+
+    if (!dbUser) throw new TRPCError({ code: "UNAUTHORIZED" });
+    const subscriptionPlan = await getUserSubscriptionPlan();
+
+    if (subscriptionPlan.isSubscribed && dbUser.stripeCustomerId) {
+      const stripeSession = await stripe.billingPortal.sessions.create({
+        customer: dbUser.stripeCustomerId,
+        return_url: billingUrl,
+      });
+      return {
+        url: stripeSession.url,
+      };
+    }
+
+    const proPlan = PLANS.find((plan) => plan.name === "Pro");
+    if (!proPlan?.price.priceId.test) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Pro plan price ID not found",
+      });
+    }
+
+    const stripeSession = await stripe.checkout.sessions.create({
+      success_url: billingUrl,
+      cancel_url: billingUrl,
+      payment_method_types: ["card"],
+      mode: "subscription",
+      billing_address_collection: "auto",
+      line_items: [
+        {
+          price: proPlan.price.priceId.test,
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        userId: user.id,
+      },
+    });
+    return { url: stripeSession.url };
+  }),
 });
 
 export type AppRouter = typeof appRouter;

@@ -5,14 +5,12 @@ import React from "react";
 import { trpc } from "../_trpc/client";
 import { Loader } from "lucide-react";
 
-type Props = {};
-
-const Page: React.FC<Props> = () => {
+const Page = () => {
   const router = useRouter();
   const params = useSearchParams();
   const origin = params.get("origin");
 
-  const { data, error, isLoading } = trpc.authCallback.useQuery(undefined, {
+  const { data, error } = trpc.authCallback.useQuery(undefined, {
     retry: true,
   });
 

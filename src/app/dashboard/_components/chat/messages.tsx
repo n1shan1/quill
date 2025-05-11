@@ -2,12 +2,11 @@
 import { trpc } from "@/app/_trpc/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
-import { keepPreviousData } from "@tanstack/react-query";
-import { Loader2, MessageSquare } from "lucide-react";
-import React, { useContext, useEffect, useRef } from "react";
-import MessageBox from "./message-box";
-import { ChatContext } from "./chat-context";
 import { useIntersection } from "@mantine/hooks";
+import { Loader2, MessageSquare } from "lucide-react";
+import { useContext, useEffect, useRef } from "react";
+import { ChatContext } from "./chat-context";
+import MessageBox from "./message-box";
 type MessagesProps = {
   fileId: string;
 };

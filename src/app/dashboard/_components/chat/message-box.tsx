@@ -79,7 +79,7 @@ const MessageBox = forwardRef<HTMLDivElement, Props>(
             {typeof message.text === "string" ? (
               <ReactMarkDown
                 components={{
-                  p: ({ node, ...props }) => (
+                  p: ({ ...props }) => (
                     <p
                       {...props}
                       className={cn("prose prose-sm break-words", {
@@ -124,5 +124,7 @@ const MessageBox = forwardRef<HTMLDivElement, Props>(
     );
   }
 );
+
+MessageBox.displayName = "Message";
 
 export default MessageBox;

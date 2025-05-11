@@ -15,7 +15,7 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   })
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       const { getUser } = getKindeServerSession();
       const users = await getUser();
       if (!users || !users.id) {
@@ -39,7 +39,7 @@ export const ourFileRouter = {
         const blobObject = await response.blob();
         const loader = new PDFLoader(blobObject);
         const pageLevelDocs = await loader.load();
-        const pageAmount = pageLevelDocs.length; //*WIP
+        // const pageAmount = pageLevelDocs.length; //*WIP
 
         //vectorize the document
         const pineconeIndex = pinecone.Index("quill");
