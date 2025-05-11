@@ -107,9 +107,8 @@ const UploadDropzone = () => {
       {({ getRootProps, getInputProps, acceptedFiles, isDragActive }) => (
         <div
           {...getRootProps()}
-          className={`border h-64 m-4 border-dashed border-foreground/30 rounded-lg transition-colors ${
-            isDragActive ? "bg-foreground/20" : "bg-foreground/10"
-          }`}
+          className={`border h-64 m-4 border-dashed border-foreground/30 rounded-lg transition-colors ${isDragActive ? "bg-foreground/20" : "bg-foreground/10"
+            }`}
         >
           <div className="flex items-center justify-center h-full w-full">
             <div className="flex flex-col items-center justify-center w-full h-full rounded-lg cursor-pointer">

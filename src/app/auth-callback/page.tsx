@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { trpc } from "../_trpc/client";
 import { Loader } from "lucide-react";
 
-const Page = () => {
+const AuthCallbackContent = () => {
   const router = useRouter();
   const params = useSearchParams();
   const origin = params.get("origin");
@@ -24,7 +24,6 @@ const Page = () => {
     }
   }, [data, error, origin, router]);
 
-  // Optionally, show a loading indicator or nothing
   return (
     <div className="w-full mt-24 flex justify-center">
       <div className="flex flex-col items-center gap-2">
@@ -37,6 +36,25 @@ const Page = () => {
         </p>
       </div>
     </div>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full mt-24 flex justify-center">
+          <div className="flex flex-col items-center gap-2">
+            <Loader className={"h-10 w-10 animate-spin"} />
+            <h3 className="text-muted-foreground text-2xl font-semibold">
+              Loading...
+            </h3>
+          </div>
+        </div>
+      }
+    >
+      <AuthCallbackContent />
+    </Suspense>
   );
 };
 
