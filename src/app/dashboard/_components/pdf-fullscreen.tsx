@@ -31,18 +31,14 @@ function PdfFullScreen({ fileUrl }: Props) {
       }}
     >
       <DialogTrigger asChild>
-        <TooltipProvider delayDuration={3}>
-          <Tooltip>
-            <TooltipTrigger onClick={() => setOpen(true)} asChild>
-              <Button variant={"ghost"} className="gap-1.5" size={"sm"}>
-                <Expand className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-xs">Rotate</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Button
+          onClick={() => setOpen(true)}
+          variant={"ghost"}
+          className="gap-1.5"
+          size={"sm"}
+        >
+          <Expand className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-7xl w-full">
         <SimpleBar autoHide={false} className="max-h-[calc(100vh-10rem)] mt-6">

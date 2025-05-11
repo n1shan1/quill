@@ -1,6 +1,3 @@
-import { config } from "process";
-import { join } from "path";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {

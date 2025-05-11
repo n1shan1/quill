@@ -36,7 +36,7 @@ import { z } from "zod";
 import SimpleBar from "simplebar-react";
 import PdfFullScreen from "./pdf-fullscreen";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 type Props = {
   fileUrl: string;
@@ -200,7 +200,8 @@ function PdfRenderer({ fileUrl }: Props) {
               onLoadSuccess={({ numPages }) => {
                 setNumPages(numPages);
               }}
-              onLoadError={() => {
+              onLoadError={(error) => {
+                console.log(error);
                 toast.error(
                   "Cannot fetch the PDF, please refresh the page, if the issue persists, reupload."
                 );
