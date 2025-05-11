@@ -1,5 +1,4 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
-import { NextRequest } from "next/server";
 
 export const config = {
   matcher: ["/dashboard/:path*", "/auth-callback"],
@@ -8,7 +7,7 @@ export const config = {
 export default withAuth({
   // This is the default behavior, but you can customize it
   callbacks: {
-    authorized: ({ req, token }: { req: NextRequest; token: any }) => {
+    authorized: ({ token }: { token: string }) => {
       if (!token) {
         return false;
       }
